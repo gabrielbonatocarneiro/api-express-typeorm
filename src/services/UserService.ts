@@ -26,7 +26,7 @@ export class UserService {
   private repository = getCustomRepository(UserRepository)
 
   async login({ email, password }: LoginRequest): Promise<User | Error> {
-    const user = await this.repository.getUserByEmail(email);
+    const user = await this.repository.getUserToLoginByEmail(email);
 
     if (!user) {
       return new Error("User not exists")
@@ -35,6 +35,8 @@ export class UserService {
     if (!await new Bcrypt().valueIsEqualHash(password, user.password)) {
       return new Error("Invalid password")
     }
+
+    delete user.password
 
     return user
   }

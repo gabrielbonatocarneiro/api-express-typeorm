@@ -1,5 +1,6 @@
 import { EntityRepository, EntityManager } from "typeorm"
 import { User } from "../entities/User"
+import { getRedis, setRedis } from "../redisConfig"
 
 type CreateUser = {
   name: string
@@ -17,22 +18,36 @@ type UpdateUser = {
 export class UserRepository {
   constructor(private manager: EntityManager) {}
 
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserToLoginByEmail(email: string): Promise<User> {
     const user = await this.manager.findOne(User, {
       where: { email }
     })
+
+    const userToRedis = {
+      user_id: user.user_id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+      updated_at: user.updated_at
+    }
+
+    await setRedis(`user_id_${user.user_id}`, JSON.stringify(userToRedis))
 
     return user
   }
 
   async show(userId: bigint, returnPw: boolean = false): Promise<User> {
     if (returnPw) {
+      // time default to select -> 14.000ms
       return await this.manager.findOne(User, Number(userId))
     }
 
-    return await this.manager.findOne(User, Number(userId), {
-      select: ["user_id", "name", "email", "created_at", "updated_at"],
-    })
+    // time dafault to select -> 2.000ms
+    const userRedis = await getRedis(`user_id_${userId}`)
+
+    const user = JSON.parse(userRedis)
+
+    return user
   }
 
   async store({ name, email, password }: CreateUser): Promise<User | Error> {

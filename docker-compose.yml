@@ -10,6 +10,7 @@ services:
       - "3333:3333"
     depends_on:
       - mariadb
+      - redisdb
 
   mariadb:
     container_name: mariadb-api-express-typeorm
@@ -23,5 +24,16 @@ services:
     volumes:
       - mysql_volume:/var/lib/mysql
 
+  redisdb:
+    container_name: redisdb-api-express-typeorm
+    image: redis
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
 volumes:
   mysql_volume:
+  redis_data:

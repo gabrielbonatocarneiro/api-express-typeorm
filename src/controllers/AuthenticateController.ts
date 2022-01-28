@@ -15,8 +15,6 @@ export class AuthenticateController {
 
     const token = jwt.sign({ id: result.user_id }, process.env.JWT_HASH_TOKEN, { expiresIn: '1h' })
 
-    delete result.password
-
     return response.json({
       user: result,
       access_token: token
