@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "docxtemplater": "^3.28.6",
     "express": "^4.17.2",
     "ioredis": "^4.28.3",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
     "mysql": "^2.18.1",
+    "pizzip": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41"
   },

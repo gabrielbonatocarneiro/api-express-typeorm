@@ -3,6 +3,7 @@ import { UserController } from "./controllers/UserController"
 import { DocumentController } from "./controllers/DocumentController"
 import { AuthenticateController } from "./controllers/AuthenticateController"
 import authMiddleware from "./middlewares/authMiddleware"
+import { DocxTemplaterExample } from "./controllers/DocxTemplaterExample"
 
 const routes = Router()
 
@@ -18,5 +19,8 @@ routes.get("/documents/:id", authMiddleware, new DocumentController().show)
 routes.post("/documents", authMiddleware, new DocumentController().store)
 routes.put("/documents/:id", authMiddleware, new DocumentController().update)
 routes.delete("/documents/:id", authMiddleware, new DocumentController().destroy)
+
+routes.post("/docx-templater-example1", new DocxTemplaterExample().example1)
+routes.post("/docx-templater-example2", new DocxTemplaterExample().example2)
 
 export { routes }

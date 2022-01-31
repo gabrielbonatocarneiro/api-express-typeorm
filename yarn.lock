@@ -113,6 +113,11 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.3.tgz#781d360c282436494b32fe7d9f7f8e64b3118aa3"
   integrity sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==
 
+"@xmldom/xmldom@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.0.tgz#9f83fd9b3506c9603baad67e44eb6e6ee8eee0ce"
+  integrity sha512-7wVnF+rKrVDEo1xjzkkidTG0grclaVnX0vKa0z9JSXcEdtftUJjvU33jLGg6SHyvs3eeqEsI7jZ6NxYfRypEEg==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -429,6 +434,13 @@ diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+
+docxtemplater@^3.28.6:
+  version "3.28.6"
+  resolved "https://registry.yarnpkg.com/docxtemplater/-/docxtemplater-3.28.6.tgz#af864e098f9da9faf1739b62869f834e3abfbf7e"
+  integrity sha512-Hc4tiop+zS0XN08gXIfOD2a0/GtD4M4HT8czFoSJz1CEg/jWGyt4yOAVbMWsx57rX1d1U3gWBcf1Ymb93g9D5g==
+  dependencies:
+    "@xmldom/xmldom" "^0.8.0"
 
 dotenv@^8.2.0:
   version "8.6.0"
@@ -1017,6 +1029,11 @@ p-map@^2.1.0:
   resolved "https://registry.yarnpkg.com/p-map/-/p-map-2.1.0.tgz#310928feef9c9ecc65b68b17693018a665cea175"
   integrity sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==
 
+pako@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.4.tgz#6cebc4bbb0b6c73b0d5b8d7e8476e2b2fbea576d"
+  integrity sha512-v8tweI900AUkZN6heMU/4Uy4cXRc2AYNRggVmTR+dEncawDJgCdLMximOVA2p4qO57WMynangsfGRb5WD6L1Bg==
+
 parse5-htmlparser2-tree-adapter@^6.0.0:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/parse5-htmlparser2-tree-adapter/-/parse5-htmlparser2-tree-adapter-6.0.1.tgz#2cdf9ad823321140370d4dbf5d3e92c7c8ddc6e6"
@@ -1058,6 +1075,13 @@ picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
+
+pizzip@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/pizzip/-/pizzip-3.1.1.tgz#4f4896189da7386e5060b148696e116a61cb2bd0"
+  integrity sha512-+SYbkj87i+/4LR2F0lIeLTRFg95aj14OhGka988Jg8HiXZVOifdBIWaKZTnfZFvvUl5torCXQ/e+wZ6D23hPuQ==
+  dependencies:
+    pako "^2.0.4"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
