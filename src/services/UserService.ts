@@ -2,6 +2,7 @@ import { Bcrypt } from "./../helpers/Bcrypt"
 import { UserRepository } from "./../repositories/UserRepository"
 import { User } from "../entities/User"
 import { getCustomRepository } from "typeorm"
+import { setRedis } from "../redisConfig"
 
 type LoginRequest = {
   email: string
@@ -35,6 +36,16 @@ export class UserService {
     if (!await new Bcrypt().valueIsEqualHash(password, user.password)) {
       return new Error("Invalid password")
     }
+
+    const userToRedis = {
+      user_id: user.user_id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+      updated_at: user.updated_at
+    }
+
+    await setRedis(`user_id_${user.user_id}`, JSON.stringify(userToRedis))
 
     delete user.password
 

@@ -59,6 +59,16 @@ export class DocumentRepository {
     })
   }
 
+  async findOneById(documentId: number): Promise<Document> {
+    return await this.manager.findOne(Document, documentId)
+  }
+
+  async findOneByNumber(number: number): Promise<Document> {
+    return await this.manager.findOne(Document, {
+      where: { number: Number(number) }
+    })
+  }
+
   async show(documentId: bigint, userId: bigint): Promise<Document> {
     let document = await this.manager.findOne(Document, Number(documentId), {
       relations: ['user'],

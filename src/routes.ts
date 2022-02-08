@@ -1,26 +1,40 @@
-import { Router } from "express"
-import { UserController } from "./controllers/UserController"
-import { DocumentController } from "./controllers/DocumentController"
-import { AuthenticateController } from "./controllers/AuthenticateController"
-import authMiddleware from "./middlewares/authMiddleware"
-import { DocxTemplaterExample } from "./controllers/DocxTemplaterExample"
+import { Router } from "express";
 
-const routes = Router()
+import authMiddleware from "./middlewares/authMiddleware";
 
-routes.post("/login", new AuthenticateController().login)
+import { UserController } from "./controllers/UserController";
+import { DocumentController } from "./controllers/DocumentController";
+import { DocxTemplaterExample } from "./controllers/DocxTemplaterExample";
+import { AuthenticateController } from "./controllers/AuthenticateController";
 
-routes.get("/user", authMiddleware, new UserController().show)
-routes.post("/user", new UserController().store)
-routes.put("/user", authMiddleware, new UserController().update)
-routes.delete("/user", authMiddleware, new UserController().destroy)
+import { validatorLogin } from "./validators/validatorLogin";
+import {
+  validatorCreateUser,
+  validatorUpdateUser,
+} from "./validators/validatorUser";
+import {
+  validatorPaginateDocumentId,
+  validatorDocumentId,
+  validatorCreateDocument,
+  validatorUpdateDocument
+} from './validators/validatorDocument'
 
-routes.get("/documents", authMiddleware, new DocumentController().index)
-routes.get("/documents/:id", authMiddleware, new DocumentController().show)
-routes.post("/documents", authMiddleware, new DocumentController().store)
-routes.put("/documents/:id", authMiddleware, new DocumentController().update)
-routes.delete("/documents/:id", authMiddleware, new DocumentController().destroy)
+const routes = Router();
 
-routes.post("/docx-templater-example1", new DocxTemplaterExample().example1)
-routes.post("/docx-templater-example2", new DocxTemplaterExample().example2)
+routes.post("/login", validatorLogin, new AuthenticateController().login);
 
-export { routes }
+routes.get("/user", authMiddleware, new UserController().show);
+routes.post("/user", validatorCreateUser, new UserController().store);
+routes.put("/user", validatorUpdateUser, authMiddleware, new UserController().update);
+routes.delete("/user", authMiddleware, new UserController().destroy);
+
+routes.get("/documents", validatorPaginateDocumentId, authMiddleware, new DocumentController().index);
+routes.get("/documents/:id", validatorDocumentId, authMiddleware, new DocumentController().show);
+routes.post("/documents", validatorCreateDocument, authMiddleware, new DocumentController().store);
+routes.put("/documents/:id", validatorUpdateDocument, authMiddleware, new DocumentController().update);
+routes.delete("/documents/:id", validatorDocumentId, authMiddleware, new DocumentController().destroy);
+
+routes.post("/docx-templater-example1", new DocxTemplaterExample().example1);
+routes.post("/docx-templater-example2", new DocxTemplaterExample().example2);
+
+export { routes };

@@ -38,7 +38,6 @@ export class DocumentController {
       complement
     })
 
-
     if (result instanceof Error) {
       return new ApiException(response).handle(400, result.message)
     }

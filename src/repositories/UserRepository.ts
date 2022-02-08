@@ -1,6 +1,6 @@
 import { EntityRepository, EntityManager } from "typeorm"
 import { User } from "../entities/User"
-import { getRedis, setRedis } from "../redisConfig"
+import { getRedis } from "../redisConfig"
 
 type CreateUser = {
   name: string
@@ -22,16 +22,6 @@ export class UserRepository {
     const user = await this.manager.findOne(User, {
       where: { email }
     })
-
-    const userToRedis = {
-      user_id: user.user_id,
-      name: user.name,
-      email: user.email,
-      created_at: user.created_at,
-      updated_at: user.updated_at
-    }
-
-    await setRedis(`user_id_${user.user_id}`, JSON.stringify(userToRedis))
 
     return user
   }
